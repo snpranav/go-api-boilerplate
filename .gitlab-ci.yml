@@ -1,0 +1,5 @@
+image: "docker:stable-git"
+
+build:
+  script:
+    - docker build -f Dockerfile .
