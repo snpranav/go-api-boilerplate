@@ -18,12 +18,12 @@ before_script:
 build:
   stage: build-alpine
   script:
-    - docker build -t snpranav/go-api-boilerplate:alpine .
+    - docker build -t docker.io/snpranav/go-api-boilerplate:alpine .
 
 build:
   stage: build-latest
   script:
-    - docker build -t snpranav/go-api-boilerplate:latest .
+    - docker build -t docker.io/snpranav/go-api-boilerplate:latest .
 
 build:
   stage: push
