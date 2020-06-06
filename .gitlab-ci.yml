@@ -19,15 +19,13 @@ build:
   stage: build-alpine
   script:
     - docker build -t snpranav/go-api-boilerplate:alpine .
-    - docker tag snpranav/go-api-boilerplate:alpine docker.io/snpranav/go-api-boilerplate:alpine
 
 build:
   stage: build-latest
   script:
     - docker build -t snpranav/go-api-boilerplate:latest .
-    - docker tag snpranav/go-api-boilerplate:latest docker.io/snpranav/go-api-boilerplate:latest
 
-push:
+build:
   stage: push
   script:
     - docker login --username $docker_username --password $docker_password
