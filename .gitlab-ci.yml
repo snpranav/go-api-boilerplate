@@ -26,4 +26,4 @@ sync:
   stage: github
   script:
     - git remote add github https://$github_username:$github_push_token@github.com/snpranav/go-api-boilerplate
-    - git push github
+    - git push github master
