@@ -4,9 +4,7 @@ variables:
   DOCKER_DRIVER: overlay2
 
 stages:
-  - build-alpine
-  - build-latest
-  - push
+  - build
   - github
 
 services:
@@ -16,10 +14,16 @@ before_script:
   - docker info
 
 build:
-  stage: build-alpine
+  stage: build
   script:
     - docker build -t docker.io/snpranav/go-api-boilerplate:alpine .
     - docker build -t docker.io/snpranav/go-api-boilerplate:latest .
     - docker login --username $docker_username --password $docker_password
     - docker push docker.io/snpranav/go-api-boilerplate:alpine
     - docker push docker.io/snpranav/go-api-boilerplate:latest
+
+sync:
+  stage: github
+  script:
+    - git remote add github https://$github_username:$github_push_token@github.com/snpranav/go-api-boilerplate
+    - git push github
