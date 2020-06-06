@@ -28,6 +28,6 @@ build:
 push:
   stage: push
   script:
-    - docker login --username $(docker_username) --password $(docker_password)
+    - docker login --username $docker_username --password $docker_password
     - docker push snpranav/go-api-boilerplate:alpine
     - docker push snpranav/go-api-boilerplate:latest
