@@ -1,5 +1,18 @@
-image: "docker:stable-git"
+image: docker:19.03.0
+
+variables:
+  DOCKER_DRIVER: overlay2
+
+stages:
+  - build
+
+services:
+  - docker:19.03.0-dind
+
+before_script:
+  - docker info
 
 build:
+  stage: build
   script:
-    - docker build -f Dockerfile .
+    - docker build -t snpranav/go-api-boilerplate .
