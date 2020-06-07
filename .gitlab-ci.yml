@@ -4,8 +4,10 @@ variables:
   DOCKER_DRIVER: overlay2
 
 stages:
-  - build
   - github
+  - build
+  - test
+  - push
 
 services:
   - docker:19.03.0-dind
@@ -13,18 +15,29 @@ services:
 before_script:
   - docker info
 
+sync:
+  stage: github
+  script:
+    - git pull gitlab master
+    - git remote add github "https://$github_username:$github_push_token@github.com/snpranav/go-api-boilerplate"
+    - git push github master
+
 build:
   stage: build
   script:
+    - docker build -t registry.gitlab.com/snpranav/go-api-boilerplate:alpine-dev .
+    - docker push registry.gitlab.com/snpranav/go-api-boilerplate:alpine-dev
+
+test:
+  stage: test
+  script:
+    - docker run --rm --name api-tests -d registry.gitlab.com/snpranav/go-api-boilerplate:alpine-dev
+    - docker exec api-tests /bin/sh -c "/go/src/gitlab.com/snpranav/go-api-boilerplate/api-check"
+
+push:
+  stage: push
     - docker build -t docker.io/snpranav/go-api-boilerplate:alpine .
     - docker build -t docker.io/snpranav/go-api-boilerplate:latest .
     - docker login --username $docker_username --password $docker_password
     - docker push docker.io/snpranav/go-api-boilerplate:alpine
     - docker push docker.io/snpranav/go-api-boilerplate:latest
-
-sync:
-  stage: github
-  script:
-    - git pull origin master
-    - git remote add github "https://$github_username:$github_push_token@github.com/snpranav/go-api-boilerplate"
-    - git push github master
