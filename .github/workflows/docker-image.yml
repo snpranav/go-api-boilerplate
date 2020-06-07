@@ -13,5 +13,6 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
+    - uses: actions/checkout@v2
     - name: Push to GitLab for CI/CD Pipeline
       run: git push "https://$GITLAB_USERNAME:$GITLAB_CI_TOKEN@gitlab.com/snpranav/go-api-boilerplate.git" HEAD:master
