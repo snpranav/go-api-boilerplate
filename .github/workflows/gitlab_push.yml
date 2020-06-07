@@ -15,6 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Push to GitLab for CI/CD Pipeline
-      run: |
-        - git pull https://github.com/${{ secrets.GITLAB_USERNAME }}/go-api-boilerplate.git master
-        - git push "https://oauth2:${{ secrets.GITLAB_CI_TOKEN }}@gitlab.com/${{ secrets.GITLAB_USERNAME }}/go-api-boilerplate.git" master 
+      run: git push "https://oauth2:${{ secrets.GITLAB_CI_TOKEN }}@gitlab.com/${{ secrets.GITLAB_USERNAME }}/go-api-boilerplate.git" master 
