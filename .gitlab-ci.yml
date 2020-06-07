@@ -17,7 +17,7 @@ merge:
   before_script:
     - git --version
   stage: merge
-  image: alpine/git:v2.24.3
+  image: snpranav/alpine-git-sh:3.12.0
   script:
     - >
       git merge origin/GITHUB_CI_PUSH
@@ -31,8 +31,8 @@ merge:
 sync:
   before_script:
     - git --version
-  stage: github
-  image: alpine/git:v2.24.3
+  stage: githu2.24.3b
+  image: snpranav/alpine-git-sh:3.12.0
   script:
     - git pull origin master
     - git push https://$github_username:$github_push_token@github.com/snpranav/go-api-boilerplate.git HEAD:master
