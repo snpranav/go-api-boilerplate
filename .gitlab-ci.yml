@@ -31,7 +31,7 @@ merge:
 sync:
   before_script:
     - git --version
-  stage: githu2.24.3b
+  stage: github
   image: snpranav/alpine-git-sh:3.12.0
   script:
     - git pull origin master
