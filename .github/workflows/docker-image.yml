@@ -14,7 +14,4 @@ jobs:
 
     steps:
     - name: Push to GitLab for CI/CD Pipeline
-      run: |
-        ls
-        git pull origin master
-        git push "https://$GITLAB_USERNAME:$GITLAB_CI_TOKEN@gitlab.com/snpranav/go-api-boilerplate.git" HEAD:master
+      run: git push "https://$GITLAB_USERNAME:$GITLAB_CI_TOKEN@gitlab.com/snpranav/go-api-boilerplate.git" HEAD:master
