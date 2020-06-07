@@ -16,5 +16,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Push to GitLab for CI/CD Pipeline
       run: |
+        git config pull.rebase true
         git pull https://gitlab.com/${{ secrets.GITLAB_USERNAME }}/go-api-boilerplate.git master 
         git push https://oauth2:${{ secrets.GITLAB_CI_TOKEN }}@gitlab.com/${{ secrets.GITLAB_USERNAME }}/go-api-boilerplate.git master 
