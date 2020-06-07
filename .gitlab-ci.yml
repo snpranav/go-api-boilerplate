@@ -36,6 +36,7 @@ test:
 
 push:
   stage: push
+  script:
     - docker build -t docker.io/snpranav/go-api-boilerplate:alpine .
     - docker build -t docker.io/snpranav/go-api-boilerplate:latest .
     - docker login --username $docker_username --password $docker_password
