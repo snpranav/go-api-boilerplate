@@ -17,4 +17,4 @@ jobs:
     - name: Push to GitLab for CI/CD Pipeline 
       run: |
         git remote add gitlab https://oauth2:${{ secrets.GITLAB_CI_TOKEN }}@gitlab.com/${{ secrets.GITLAB_USERNAME }}/go-api-boilerplate.git
-        git push gitlab master 
+        git push gitlab master --force
