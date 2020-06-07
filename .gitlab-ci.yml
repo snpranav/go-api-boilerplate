@@ -17,7 +17,7 @@ before_script:
   - docker info
 
 merge:
-  stages: merge
+  stage: merge
   image: alpine/git:v2.24.3
   script:
     - >
