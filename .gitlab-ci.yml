@@ -4,7 +4,7 @@ variables:
   DOCKER_DRIVER: overlay2
 
 stages:
-  - merge
+  # - merge
   - github
   - build
   - test
@@ -13,21 +13,21 @@ stages:
 services:
   - docker:19.03.0-dind
 
-merge:
-  before_script:
-    - git --version
-  stage: merge
-  image: snpranav/alpine-git-sh:3.12.0
-  script:
-    - >
-      git merge origin/GITHUB_CI_PUSH
-      if [ $? -eq 0 ]
-      then
-        git push -d origin GITHUB_CI_PUSH
-        git push --all https://$github_username:$github_push_token@github.com/snpranav/go-api-boilerplate.git
-      else
-        echo "No GITHUB branch needs to be merged."
-      fi
+# merge:
+#   before_script:
+#     - git --version
+#   stage: merge
+#   image: snpranav/alpine-git-sh:3.12.0
+#   script:
+#     - >
+#       git merge origin/GITHUB_CI_PUSH
+#       if [ $? -eq 0 ]
+#       then
+#         git push -d origin GITHUB_CI_PUSH
+#         git push --all https://$github_username:$github_push_token@github.com/snpranav/go-api-boilerplate.git
+#       else
+#         echo "No GITHUB branch needs to be merged."
+#       fi
 
 sync:
   before_script:
