@@ -20,7 +20,7 @@ merge:
   stages: merge
   image: alpine/git:v2.24.3
   script:
-    ->
+    - >
       git merge origin/GITHUB_CI_PUSH
       if [ $? -eq 0 ]; then
         git push -d origin GITHUB_CI_PUSH
