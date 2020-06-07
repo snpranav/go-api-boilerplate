@@ -1,0 +1,19 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  push:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Push to GitLab for CI/CD Pipeline
+      run: |
+        git pull origin master
+        git push "https://$GITLAB_USERNAME:$GITLAB_CI_TOKEN@gitlab.com/snpranav/go-api-boilerplate.git" HEAD:master
