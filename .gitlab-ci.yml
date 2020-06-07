@@ -4,6 +4,7 @@ variables:
   DOCKER_DRIVER: overlay2
 
 stages:
+  - merge
   - github
   - build
   - test
@@ -15,8 +16,22 @@ services:
 before_script:
   - docker info
 
+merge:
+  stages: merge
+  image: alpine/git:v2.24.3
+  script:
+    ->
+      git merge origin/GITHUB_CI_PUSH
+      if [ $? -eq 0 ]; then
+        git push -d origin GITHUB_CI_PUSH
+        git push --all https://$github_username:$github_push_token@github.com/snpranav/go-api-boilerplate.git
+      else
+        echo "No GITHUB branch needs to be merged."
+      fi
+
 sync:
   stage: github
+  image: alpine/git:v2.24.3
   script:
     - git pull origin master
     - git push https://$github_username:$github_push_token@github.com/snpranav/go-api-boilerplate.git HEAD:master
