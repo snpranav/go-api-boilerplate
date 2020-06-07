@@ -32,7 +32,6 @@ services:
 sync:
   before_script:
     - docker info
-  sync:
   stage: github
   script:
     - git pull origin master
