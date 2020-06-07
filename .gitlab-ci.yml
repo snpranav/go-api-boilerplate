@@ -13,10 +13,9 @@ stages:
 services:
   - docker:19.03.0-dind
 
-before_script:
-  - docker info
-
 merge:
+  before_script:
+    - git --version
   stage: merge
   image: alpine/git:v2.24.3
   script:
@@ -30,6 +29,8 @@ merge:
       fi
 
 sync:
+  before_script:
+    - git --version
   stage: github
   image: alpine/git:v2.24.3
   script:
@@ -37,6 +38,8 @@ sync:
     - git push https://$github_username:$github_push_token@github.com/snpranav/go-api-boilerplate.git HEAD:master
 
 build:
+  before_script:
+    - docker info
   stage: build
   script:
     - docker build -t registry.gitlab.com/snpranav/go-api-boilerplate:alpine-dev .
@@ -44,12 +47,16 @@ build:
     - docker push registry.gitlab.com/snpranav/go-api-boilerplate:alpine-dev
 
 test:
+  before_script:
+    - docker info
   stage: test
   script:
     - docker run --rm --name api-tests -d registry.gitlab.com/snpranav/go-api-boilerplate:alpine-dev
     - docker exec api-tests /bin/sh -c "/go/src/gitlab.com/snpranav/go-api-boilerplate/api-check"
 
 push:
+  before_script:
+    - docker info
   stage: push
   script:
     - docker build -t docker.io/snpranav/go-api-boilerplate:alpine .
