@@ -18,4 +18,6 @@ jobs:
       run: |
         git remote add gitlab https://oauth2:${{ secrets.GITLAB_CI_TOKEN }}@gitlab.com/${{ secrets.GITLAB_USERNAME }}/go-api-boilerplate.git
         git checkout -b GITHUB_CI_PUSH
+        git push -u origin master
+        git fetch gitlab --unshallow origin
         git push -u gitlab GITHUB_CI_PUSH
