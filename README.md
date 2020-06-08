@@ -1,6 +1,6 @@
 # Go API Boilerplate
 ### Simple Go API docker image.
-### Official docker image on Docker hub - [https://hub.docker.com/r/go-api-boilerplate](https://hub.docker.com/r/go-api-boilerplate).
+### Official docker image on Docker hub - [https://hub.docker.com/r/snpranav/go-api-boilerplate](https://hub.docker.com/r/snpranav/go-api-boilerplate).
 
 #### Run it in a docker container
 ```command
