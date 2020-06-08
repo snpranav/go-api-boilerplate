@@ -31,9 +31,8 @@ services:
 
 sync:
   before_script:
-    - git --version
+    - docker info
   stage: github
-  image: snpranav/alpine-git-sh:3.12.0
   script:
     - git pull origin master
     - git push https://$github_username:$github_push_token@github.com/snpranav/go-api-boilerplate.git HEAD:master
